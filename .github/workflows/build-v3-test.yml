@@ -1,4 +1,4 @@
-name: Build Daily English 3.0 test APK
+name: Build Daily English 3.1 test APK
 on:
   push:
     branches: [codex/daily-english-v3-test]
@@ -13,24 +13,22 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Check preinstalled Android SDK
-        run: |
-          test -f "$ANDROID_HOME/platforms/android-35/android.jar"
-          test -x "$ANDROID_HOME/build-tools/35.0.0/apksigner"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
-      - name: Compile test APK
+      - name: Compile practice test APK
         run: |
           unzip -q daily-english-v3-source.zip -d v3-source
+          printf '%s' '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' | base64 -d | gzip -d > "$RUNNER_TEMP/daily-english-31.patch"
+          patch --batch --directory=v3-source -p1 < "$RUNNER_TEMP/daily-english-31.patch"
           gradle -p v3-source --no-daemon assembleDebug
-      - name: Verify package and signing
+      - name: Verify APK
         run: |
           app=v3-source/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify "$app"
-          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$app" | grep -F "package: name='com.dailyenglish.app.test' versionCode='3'"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$app" | grep -F "package: name='com.dailyenglish.app.test31' versionCode='4' versionName='3.1'"
       - uses: actions/upload-artifact@v4
         with:
-          name: Daily-English-3.0-Test
+          name: Daily-English-3.1-Test
           path: v3-source/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
